@@ -46,7 +46,7 @@ def main():
     except ConnectionRefusedError:
         print("Сервер не доступен")
     except Exception as e:
-        print("Ошибка: {e}")
+        print(f"Ошибка: {e}")
     finally:
         # закрываем соединение
         sock.close()
