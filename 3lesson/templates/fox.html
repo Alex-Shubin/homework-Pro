@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    
+    {% for fox in foxes %}
+        <img src="{{ fox }}" alt="Some fox">
+    {% endfor %}
+
+{% endblock %}
