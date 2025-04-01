@@ -4,7 +4,7 @@ import os
 
 # не работает
 # BASE_DIR = os.getcwd()
-BASE_DIR = os.path.dirname(__name__)
+BASE_DIR = os.path.dirname(__file__)
 
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
