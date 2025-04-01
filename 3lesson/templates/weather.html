@@ -1,19 +1,12 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h1>Прогноз погоды</h1>
-    <form method="POST" action="/weather/">
-        <input type="text" name="city" placeholder="Город">
-        <input type="submit" value="Получить прогноз">
-    </form>
 
-    {% if weather_data %}
-        <div class="weather-card">
-            <h2>Погода в {{ weather_data.city }}</h2>
-            <img src="http://openweathermap.org/img/wn/{{ weather_data.icon }}@2x.png" alt="Weather icon">
-            <p>Температура: {{ weather_data.temp }} C</p>
-            <p>Ощущяется как: {{ weather_data.feels_like }} C</p>
-            <p>Описание: {{ weather_data.description }}</p>
-        </div>
-    {% endif %}
+    <div class="weather-card">
+        <h2>{{ weather_data.city }}: погода сейчас</h2>
+        <p>Температура: {{ weather_data.temp }} C</p>
+        <p>Ощущяется как: {{ weather_data.feels_like }} C</p>
+        <p>Описание: {{ weather_data.description }}</p>
+    </div>
+
 {% endblock %}

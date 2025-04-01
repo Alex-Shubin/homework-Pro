@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <h1>Введите название города</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Город">
+        <input type="submit" value="Получить прогноз">
+    </form>
+
+{% endblock %}

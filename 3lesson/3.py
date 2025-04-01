@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, redirect, url_for, request
 import requests
 import os
 
@@ -23,7 +23,6 @@ def duck():
     # Случайная утка
     try:
         server_reply = requests.get('https://random-d.uk/api/v2/random')
-        print(server_reply)
         data = server_reply.json()
         return render_template('duck.html', 
                                image_url=data['url'],
@@ -42,17 +41,31 @@ def fox(num):
         foxes.append(server_reply.json()['image'])
     return render_template('fox.html', foxes=foxes)
 
+
+# def weather_select():
+#     # Погода в Минске
+#     return weather('Minsk')
+
 @app.route('/weather_minsk/')
 def weather_minsk():
     # Погода в Минске
     return weather('Minsk')
 
+@app.route('/weather/', methods=['GET', 'POST'])
+def enter_city_name():
+    if request.method == 'POST':
+        city = request.form.get('city')
+        print(city)
+        return redirect(url_for('weather', city=city))
+    return render_template('city_form.html')
+
 @app.route('/weather/<city>/')
 def weather(city):
     # Погода для заданного города
+
     try:
         server_reply = requests.get(
-            f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metrics&lang=ru')
+            f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric&lang=ru')
         data = server_reply.json()
 
         if server_reply.status_code != 200:
@@ -65,7 +78,7 @@ def weather(city):
             'description': data['weather'][0]['description'].capitalize(),
             'icon': data['weather'][0]['icon']
         }
-        return render_template('weather.html', **weather_data)
+        return render_template('weather.html', weather_data=weather_data)
     except Exception as e:
         return f'Ошибка в модуле погоды: {str(e)}', 500
 
