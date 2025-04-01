@@ -2,8 +2,9 @@ from flask import Flask, render_template, redirect, url_for, request
 import requests
 import os
 
-# работает от корневой папки проекта
+# не работает
 # BASE_DIR = os.getcwd()
+BASE_DIR = os.path.dirname(__name__)
 
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
@@ -41,6 +42,7 @@ def fox(num):
         foxes.append(server_reply.json()['image'])
     return render_template('fox.html', foxes=foxes)
 
+
 @app.route('/weather_minsk/')
 def weather_minsk():
     # Погода в Минске
@@ -57,6 +59,7 @@ def enter_city_name():
 @app.route('/weather/<city>/')
 def weather(city):
     # Погода для заданного города
+
     try:
         server_reply = requests.get(
             f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric&lang=ru')
