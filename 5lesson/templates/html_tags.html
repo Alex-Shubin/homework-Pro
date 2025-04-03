@@ -1,0 +1,156 @@
+<!-- '''
+добавить в прошлый проект ссылку на страницу с текущим дз
+на этой страницы создать тэги header main floor.
+в main сделать несколько section каждый со своим заданием.
+Задания на картинках в этой папке. 
+В 4 и 5 задании таблицы можно пока сделать черно-белыми. 
+URL картинки для 6 задания: https://img.freepik.com/premium-vector/map-treasures-paper-parchment_8071-3421.jpg
+''' -->
+
+{% extends 'index.html' %}
+
+{% block style %}
+    <style>
+        .evtushenko {
+            max-width: 363px;
+            padding: 0px, 20px;
+            text-align: left;
+            background-color: bisque;
+        }
+
+        .table_gems .heading {
+            font-weight: 600;
+            text-align: center;
+        }
+        .table_gems table, td {
+            border: 1px solid #000;
+            margin: 10px;
+        }
+
+        .table_gems2 {
+            border-collapse: collapse;
+            width: 250px;
+        }
+
+        .table_gems2 thead, td {
+            border: 1px solid black;
+            /* padding: 7px; */
+            text-align: center;
+        }
+        .table_gems2 thead {
+            background-color: #a64d79;
+            color: white;
+            font-weight: 700;
+        }
+
+        .table_gems2 tbody tr:nth-child(odd) {
+            background: #f4f7c5;
+        }
+
+        .table_gems2 tbody tr:nth-child(even) {
+            background: #aeb17c;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<header>Шапка страницы</header>
+<main>
+    <section>
+        <p>Joy of T<sub>E</sub>X</p>
+    </section>
+    <section class="evtushenko">
+    <pre>
+    
+    <span style="font-size: 18px; font-weight: 700;">Евгений Евтушенко</span>
+
+    <span style="text-align: justify;">         &mdash; 1955 &mdash;</span>
+
+    Бывало, спит у ног собака,
+    костер занявшийся гудит,
+    и женщина из молумрака
+    глазами зыбкими глядит.
+
+    Потом под пихтою приляжет
+    на куртку рыжую мою
+    и мне,
+       задумчивая,
+                 скажет:
+    "А ну-ка, спой!.." &mdash;
+                    и я пою.
+        </p>
+    </pre>
+    </section>
+    <section class="table_gems">
+        <table style="width: 350px;">
+            <caption>Добыча дракоценных камней</caption>
+            <tr style="margin: 10px;">
+                <td></td>
+                <td class="heading">2010</td>
+                <td class="heading">2012</td>
+                <td class="heading">2014</td>
+            </tr>
+            <tr>
+                <td>Сапфиры</td>
+                <td rowspan="2">1483</td>
+                <td>4532</td>
+                <td>6743</td>
+            </tr>
+            <tr>
+                <td>Рубины</td>
+                <td>3835</td>
+                <td>7482</td>
+            </tr>
+            <tr>
+                <td>Алмазы</td>
+                <td>683</td>
+                <td colspan="2" style="text-align: center;">238</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <table class="table_gems2">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>2004</td>
+                    <td>2005</td>
+                    <td>2006</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Рубины</td>
+                    <td>43</td>
+                    <td>51</td>
+                    <td>79</td>
+                </tr>
+                <tr>
+                    <td>Изумруды</td>
+                    <td>28</td>
+                    <td>34</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td>Сапфиры</td>
+                    <td>29</td>
+                    <td>57</td>
+                    <td>36</td>
+                </tr>
+                <tr>
+                    <td>Аметисты</td>
+                    <td>23</td>
+                    <td>64</td>
+                    <td>97</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+
+
+<footer>Подвал страницы</footer>
+{% endblock %}

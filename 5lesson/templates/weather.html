@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <div class="weather-card">
+        <h2>{{ weather_data.city }}: погода сейчас</h2>
+        <p>Температура: {{ weather_data.temp }} C</p>
+        <p>Ощущяется как: {{ weather_data.feels_like }} C</p>
+        <p>Описание: {{ weather_data.description }}</p>
+    </div>
+
+{% endblock %}
