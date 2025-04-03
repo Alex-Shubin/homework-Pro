@@ -22,11 +22,35 @@ def send_command(sock, command):
     sock.send(command.encode())
     print(f"Ответ сервера: {sock.recv(1024).decode()}")
 
+def register_user(sock):
+    login = input("Введите логин: ")
+    password = input("Введите пароль: ")
+    command = f"command:reg; login:{login}; password:{password}"
+    print(f"Регистрация пользователя: {login}")
+    send_command(sock, command)
+
+def login_user(sock):
+    login = input("Введите логин: ")
+    password = input("Введите пароль: ")
+    command = f"command:signin; login:{login}; password:{password}"
+    print(f"Вход пользователя: {login}")
+    send_command(sock, command)
+
+def list_users(sock):
+    command = f"command:list_users"
+    send_command(sock, command)
+    # print(sock.recv(1024).decode())
+
+def disconnect_client(sock):
+    command = f"command:disconnect"
+    send_command(sock, command)
+    print("Выход из программы")
+
 def main():
     HOST = ('127.0.0.1', 7777)
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+    
     try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.connect(HOST)
         print(f"Подключено к {HOST}")
 
@@ -40,23 +64,13 @@ def main():
             choice = input("Выберите действие: ")
 
             if choice == "1":
-                login = input("Введите логин: ")
-                password = input("Введите пароль: ")
-                command = f"command:reg; login:{login}; password:{password}"
-                print(f"Регистрация пользователя: {login}")
-                send_command(sock, command)
+                register_user(sock)
             elif choice == "2":
-                login = input("Введите логин: ")
-                password = input("Введите пароль: ")
-                command = f"command:signin; login:{login}; password:{password}"
-                print(f"Вход пользователя: {login}")
-                send_command(sock, command)
+                login_user(sock)
             elif choice == "3":
-                command = f"command:list_users"
-                send_command(sock, command)
-                # print(sock.recv(1024).decode())
+                list_users(sock)
             elif choice == "4":
-                print("Выход из программы")
+                disconnect_client(sock)
                 break
             else:
                 print("Пожалуйста, выберите действие из меню")

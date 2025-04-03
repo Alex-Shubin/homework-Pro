@@ -53,13 +53,13 @@ import re
 def send_http(text, conn):
     conn.send(OK + HEADERS_text + text.encode("utf-8"))
 
-def is_file(path):
+def is_file_requested(path):
     if path[-4:] in ['.jpg', '.png', '.gif', '.ico', '.txt'] or \
         path[-5:] in ['.html', '.json']:
         return True
     return False
 
-def send_file(file_name, conn):
+def send_file_http(file_name, conn):
     try:
         with open('2lesson/'+file_name.lstrip('/'), 'rb') as f:
             conn.send(OK)
@@ -71,7 +71,7 @@ def send_file(file_name, conn):
         conn.send(ERR_404)
         raise IOError("File not found!")
     
-def is_test_msg(path):
+def is_test_requested(path):
     if path.startswith("/test/") and len(path.strip('/').split('/')) >= 2:
         try:
             int(path.strip('/').split('/')[1])
@@ -80,16 +80,16 @@ def is_test_msg(path):
             return False
     return False
 
-def send_test_msg(path, conn):
+def send_test_http(path, conn):
     num = int(path.strip('/').split('/')[1])
     send_http(f"тест с номером {num} запущен", conn)
 
-def is_message(path):
+def is_message_requested(path):
     if path.startswith("/message/") and len(path.strip('/').split('/')) >= 3:
         return True
     return False
 
-def send_message(path, conn, users):
+def send_message_http(path, conn, users):
     login = path.strip('/').split('/')[1]
     text = path.strip('/').split('/')[2]
     if login in users:
@@ -107,13 +107,38 @@ def is_command(data):
         return True
     return False
     
-def is_register(data):
+def is_register_cmd(data):
     if "reg" in data:
         return True
     
-def is_signin(data):
+def register_user_cmd(data, conn, users):
+    login = data.split(";", 2)[1].strip(" ").split(":")[1]
+    password = data.split(";", 2)[2].strip(" ").split(":")[1]
+    if validate_and_register(login, password, conn):
+        if not is_user_exists(login, users):
+            conn.send(f"{datetime_now} - " \
+                        f"пользователь {login} зарегистрирован".encode())
+            users[login] = password
+        else:
+            conn.send(f"{datetime_now} - " \
+                        f"пользователь {login} уже существует".encode())
+
+
+def is_signin_cmd(data):
     if "signin" in data:
         return True
+    
+def signin_user_cmd(data, conn, users):
+    login = data.split(";", 2)[1].strip(" ").split(":")[1]
+    password = data.split(";", 2)[2].strip(" ").split(":")[1]
+    if is_login_correct(login, password, users):
+        conn.send(f"{datetime_now} - " \
+                    f"пользователь {login} произведен вход".encode())
+    else:
+        conn.send(f"{datetime_now} - " \
+                    f"ошибка входа {login} - " \
+                    f"неверный пароль/логин".encode())
+
 
 def is_valid_login(login:str):
     if not login:
@@ -128,7 +153,7 @@ def is_valid_pass(password:str):
     if not re.match(r"^(?=.*\d)[a-zA-Z0-9]{8,}$", password):
         raise ValueError("Пароль не менее 8 символов, минимум 1 цифра")
     
-def check_reg_login_pass(login, password, conn):
+def validate_and_register(login, password, conn):
     try:
         is_valid_login(login)
         is_valid_pass(password)
@@ -138,16 +163,24 @@ def check_reg_login_pass(login, password, conn):
                   f" - ошибка регистрации {login} {e}".encode())
         return False
     
-def if_user_exists(login, users):
+def is_user_exists(login, users):
     return login in users
 
-def if_login_correct(login, password, users):
+def is_login_correct(login, password, users):
     return login in users and users[login] == password
 
-def is_list_users(data):
+def is_list_users_cmd(data):
     if "list_users" in data:
         return True
     return False
+
+def list_users_cmd(conn, users):
+    user_list = "\n".join(users.keys())
+    user_list_report = f"{datetime_now} - Список пользователей:\n{user_list}"
+    conn.send(user_list_report.encode())
+
+def is_disconnect(data):
+    return True if "disconnect" in data else False
     
 HOST = ('127.0.0.1', 7777)
 
@@ -171,54 +204,38 @@ datetime_now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 while True:
     print("====Listen====")
     conn, addr = sock.accept()
-    data = conn.recv(1024).decode()
-    print(data)
+    
+    while True:
+        data = conn.recv(1024).decode()
+        print(data)
 
-    try:
-        if is_http(data): # если запрос пришел по http
-            method, path, ver = data.split('\n')[0].split(" ", 2)
-            print('====', method, path, ver)
-            if path == "/":
-                send_file('1.html', conn)
-            elif is_test_msg(path):
-                send_test_msg(path, conn)
-            elif is_message(path):
-                send_message(path, conn, users)
-            elif is_file(path):
-                send_file(path, conn)
-            else:
-                send_http(f"пришли неизвестные  данные по HTTP - " \
-                    f"{path}", conn)
-        elif is_command(data): # если запрос пришел из командной строки
-            if is_register(data): # если запрос на регистрацию
-                login = data.split(";", 2)[1].strip(" ").split(":")[1]
-                password = data.split(";", 2)[2].strip(" ").split(":")[1]
-                if check_reg_login_pass(login, password, conn):
-                    if not if_user_exists(login, users):
-                        conn.send(f"{datetime_now} - " \
-                                  f"пользователь {login} зарегистрирован".encode())
-                        users[login] = password
-                    else:
-                        conn.send(f"{datetime_now} - " \
-                                  f"пользователь {login} уже существует".encode())
-            elif is_signin(data): # если запрос на логин
-                login = data.split(";", 2)[1].strip(" ").split(":")[1]
-                password = data.split(";", 2)[2].strip(" ").split(":")[1]
-                if if_login_correct(login, password, users):
-                    conn.send(f"{datetime_now} - " \
-                              f"пользователь {login} произведен вход".encode())
+        try:
+            if is_http(data): # если запрос пришел по http
+                method, path, ver = data.split('\n')[0].split(" ", 2)
+                print('http data: ', method, path, ver)
+                if path == "/":
+                    send_file_http('1.html', conn)
+                elif is_test_requested(path):
+                    send_test_http(path, conn)
+                elif is_message_requested(path):
+                    send_message_http(path, conn, users)
+                elif is_file_requested(path):
+                    send_file_http(path, conn)
                 else:
-                    conn.send(f"{datetime_now} - " \
-                              f"ошибка входа {login} - " \
-                              f"неверный пароль/логин".encode())
-            elif is_list_users(data): # если запрос на листинг пользователей
-                user_list = "\n".join(users.keys())
-                user_list_report = f"{datetime_now} - Список пользователей:\n{user_list}"
-                conn.send(user_list_report.encode())
-        else:
-            conn.send(f"пришли неизвестные  данные - {data}".encode())
-            conn.send(b'=====no http=====')
-    except Exception as e:
-        print(f'Error: {e}')
+                    send_http(f"пришли неизвестные  данные по HTTP - " \
+                        f"{path}", conn)
+            elif is_command(data): # если запрос пришел из командной строки
+                if is_register_cmd(data): # если запрос на регистрацию
+                    register_user_cmd(data, conn, users)
+                elif is_signin_cmd(data): # если запрос на логин
+                    signin_user_cmd(data, conn, users)
+                elif is_list_users_cmd(data): # если запрос на листинг пользователей
+                    list_users_cmd(conn, users)
+                elif is_disconnect(data):
+                    break
+            else:
+                conn.send(f"пришли неизвестные  данные - {data}".encode())
+        except Exception as e:
+            print(f'Error: {e}')
     
     conn.close()
