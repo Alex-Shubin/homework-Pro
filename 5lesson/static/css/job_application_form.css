@@ -1,0 +1,58 @@
+.job_application_form h3 {
+    font-size: 28px;
+}
+
+/* .job_application_form label {
+    display: inline;
+    margin-bottom: 5px;
+}
+
+.job_application_form input {
+    max-width: 50%;
+    margin-bottom: 20px;
+    
+} */
+
+.job_application_form .form-container {
+    display: grid;
+    grid-template-columns: 20% 45% 35%;
+    gap: 10px;
+}
+
+.job_application_form .form-row {
+    display:contents;
+}
+
+.job_application_form .form-row label {
+    grid-column: 1;
+}
+
+.job_application_form .form-row input {
+    grid-column: 2;
+}
+
+.job_application_form fieldset {
+    max-width: 500px;
+    margin: 10px 0px;
+}
+
+.job_application_form .red_star {
+    color: red;
+}
+
+.job_application_form .form-container2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.job_application_form .form-container2 label {
+    display: inline-block;
+}
+
+.job_application_form #submit {
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 0px;
+
+}
