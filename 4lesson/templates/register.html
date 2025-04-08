@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+{% block style %}
+
+<style>
+    .error {
+        color: red;
+        padding-left: 30px;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <form method="post">
+        <fieldset>
+            <legend>Заполните поля для регистрации</legend>
+            {% if filled_fields %}
+                <p><label for="first_name">Имя: </label><input type="text" name="first_name"
+                    value="{{ filled_fields.first_name|default('') }}"></p>
+                {% if errors.first_name %}
+                    <p class="error">{{ errors.first_name }}</p>
+                {% endif %}
+                <p><label for="last_name">Фамилия: </label><input type="text" name="last_name"
+                    value="{{ filled_fields.last_name|default('') }}"></p>
+                {% if errors.last_name %}
+                    <p class="error">{{ errors.last_name }}</p>
+                {% endif %}
+                <p><label for="login">Логин: </label><input type="text" name="login"
+                    value="{{ filled_fields.login|default('') }}"></p>
+                {% if errors.login %}
+                    <p class="error">{{ errors.login }}</p>
+                {% endif %}
+                <p><label for="password">Пароль: </label><input type="password" name="password"></p>
+                {% if errors.password %}
+                    <p class="error">{{ errors.password }}</p>
+                {% endif %}
+                <p><label for="email">E-mail: </label><input type="email" name="email"
+                    value="{{ filled_fields.email|default('') }}"></p>
+                {% if errors.email %}
+                    <p class="error">{{ errors.email }}</p>
+                {% endif %}
+                <p><label for="age">Возраст</label><input type="text" name="age"
+                    value="{{ filled_fields.age|default('') }}"></p>
+                {% if errors.age %}
+                    <p class="error">{{ errors.age }}</p>
+                {% endif %}
+            {% else %}
+                <p><label for="first_name">Имя: </label><input type="text" name="first_name"></p>
+                <p><label for="last_name">Фамилия: </label><input type="text" name="last_name"></p>
+                <p><label for="login">Логин: </label><input type="text" name="login"></p>
+                <p><label for="password">Пароль: </label><input type="password" name="password"></p>
+                <p><label for="email">E-mail: </label><input type="email" name="email"></p>
+                <p><label for="age">Возраст</label><input type="text" name="age"></p>
+            {% endif %}
+                <p><input type="submit" value="Зарегистрировать"></p>
+        </fieldset>
+    </form>
+</section>
+
+
+{% endblock %}

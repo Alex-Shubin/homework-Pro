@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Animal, Weather and Daily Quote app</title>
+    <style>
+        header {
+            background-color: #f0f0f0;
+            padding: 20px 0; /* отступ сверху и снизу */
+            border: 1px solid #ccc; /* рамка */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Максимальная ширина контейнера */
+            margin: 0 auto; /* Центрирование контейнера */
+            padding: 0; /* Убираем отступы чтобы flex элементы не обрезались */
+            box-sizing: border-box; /*  ВАЖНО: Включаем учет padding-ов в ширину контейнера, иначе кнопки вылазят за пределы экрана */
+        }
+
+        .nav {
+            display: flex; /* Используем flexbox */
+            flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
+            justify-content: center; /* Центрируем элементы по горизонтали */
+            align-items: center; /* Выравниваем элементы по вертикали */
+            gap: 10px; /* Отступ между кнопками */
+        }
+
+        .nav a {
+            background-color: #4CAF50; /* Цвет кнопки */
+            color: white; /* Цвет текста */
+            text-decoration: none; /* Убираем подчеркивание */
+            padding: 10px 20px; /* Внутренний отступ кнопки */
+            border: none; /* Убираем рамку */
+            border-radius: 5px; /* Скругленные углы */
+            text-align: center; /* Выравниваем текст по центру */
+            /* flex: 1; С этим flex: 1 кнопки всегда будут растягиваться во всю ширину, это не то что нам нужно */
+            /* Задаем ширину кнопки в процентах. Учитываем отступы по бокам (150px слева и справа) */
+            /* Таким образом, полезная ширина у нас 1200px - 300px = 900px */
+            /* Чтобы на строку уместилось максимум N кнопок, задаем ширину каждой кнопки  (100% / N)  */
+            max-width: 30%; /* 100% / 3 = 33%, с небольшим запасом ставим 30%, чтобы кнопки точно влезали */
+            min-width: 150px; /* Минимальная ширина чтобы текст не вылезал */
+            white-space: nowrap; /* Запрещаем перенос текста */
+            overflow: hidden; /* Обрезаем текст если он не помещается */
+            text-overflow: ellipsis; /* Добавляем многоточие если текст не помещается */
+            transition: background-color 0.3s ease; /* Плавный переход цвета при наведении */
+            box-sizing: border-box; /* Включаем учет padding-ов в ширину элемента */
+            margin: 0 5px; /* Добавляем небольшой отступ слева и справа от кнопки */
+        }
+
+        .nav a:hover {
+            background-color: #367C39; /* Цвет кнопки при наведении */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .weather-card {
+            padding: 20px;
+            background: #f0f8ff;
+            border-radius: 10px;
+        }
+    </style>
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+<header>
+    <div class="container">
+        {% if 'logged_in' in session %}
+        <p style="text-align: center;">Приветствуем, {{ g.user.first_name }}
+            {{ g.user.last_name }}!
+        </p>    
+        <nav class="nav">
+                <a href="/">Главная</a>
+                <a href="/duck/">Случайная утка</a>
+                <a href="/fox/3/">Сколько-то лис</a>
+                <a href="/weather_minsk/">Погода в Минске</a>
+                <a href="/weather/grodno/">Погода в Гродно</a>
+                <a href="/weather/">Погода в другом городе</a>
+                <a href="/html_tags/">HTML-formatting</a>
+                <a href="/logout/">Logout</a>
+            </nav>
+        {% else %}
+            <nav class="nav">
+                <a href="/login/">Login</a>
+                <a href="/register/">Register</a>
+            </nav>
+        {% endif %}
+
+    </div>
+</header>
+<main>
+
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>

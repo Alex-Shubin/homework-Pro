@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+
+{% block style %}
+
+<style>
+    .error {
+        color: red;
+        padding-left: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section>
+    <form method="post">
+        <fieldset>
+        <legend>Введите ваши данные:</legend>
+        <p><label for="login">Ваш логин: </label>
+            <input type="text" name="login" 
+            value="{{ filled_login|default('') }}" 
+            placeholder="Admin123"></p>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        <p><label for="password">Ваш пароль: </label>
+            <input type="password" name="password" 
+            placeholder="Admin123"></p>
+        <p><input type="submit" value="Войти"></p>
+    </fieldset>
+    </form>
+
+</section>
+
+{% endblock %}

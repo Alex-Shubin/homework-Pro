@@ -1,0 +1,347 @@
+<!-- '''
+добавить в прошлый проект ссылку на страницу с текущим дз
+на этой страницы создать тэги header main floor.
+в main сделать несколько section каждый со своим заданием.
+Задания на картинках в этой папке. 
+В 4 и 5 задании таблицы можно пока сделать черно-белыми. 
+URL картинки для 6 задания: https://img.freepik.com/premium-vector/map-treasures-paper-parchment_8071-3421.jpg
+''' -->
+
+{% extends 'index.html' %}
+
+{% block style %}
+    <link rel="stylesheet" href="../static/css/table_gems.css">
+    <link rel="stylesheet" href="../static/css/table_gems2.css">
+    <link rel="stylesheet" href="../static/css/table_gems3.css">
+    <link rel="stylesheet" href="../static/css/progress.css">
+    <link rel="stylesheet" href="../static/css/chem_elements.css">
+    <link rel="stylesheet" href="../static/css/headers_example.css">
+    <link rel="stylesheet" href="../static/css/job_application_form.css">
+    <style>
+        section {
+            padding: 20px;
+        }
+
+        section:nth-child(1n) {
+            background-color: aliceblue;
+        }
+
+        section:nth-child(2n) {
+            background-color: antiquewhite;
+        }
+
+        .evtushenko {
+            max-width: 363px;
+            padding: 0px, 20px;
+            text-align: left;
+            background-color: bisque;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block content %}
+<header>Шапка страницы</header>
+<main>
+    <section>
+        <p>Joy of T<sub>E</sub>X</p>
+    </section>
+    <section class="evtushenko">
+    <pre>
+    
+    <span style="font-size: 18px; font-weight: 700;">Евгений Евтушенко</span>
+
+    <span style="text-align: justify;">         &mdash; 1955 &mdash;</span>
+
+    Бывало, спит у ног собака,
+    костер занявшийся гудит,
+    и женщина из молумрака
+    глазами зыбкими глядит.
+
+    Потом под пихтою приляжет
+    на куртку рыжую мою
+    и мне,
+       задумчивая,
+                 скажет:
+    "А ну-ка, спой!.." &mdash;
+                    и я пою.
+        </p>
+    </pre>
+    </section>
+    <section class="table_gems">
+        <table style="width: 350px;">
+            <caption>Добыча дракоценных камней</caption>
+            <thead>
+                <tr style="margin: 10px;">
+                    <td></td>
+                    <td>2010</td>
+                    <td>2012</td>
+                    <td>2014</td>
+                </tr>
+            </thead>
+            <tr>
+                <td>Сапфиры</td>
+                <td rowspan="2">1483</td>
+                <td>4532</td>
+                <td>6743</td>
+            </tr>
+            <tr>
+                <td>Рубины</td>
+                <td>3835</td>
+                <td>7482</td>
+            </tr>
+            <tr>
+                <td>Алмазы</td>
+                <td>683</td>
+                <td colspan="2" style="text-align: center;">238</td>
+            </tr>
+        </table>
+    </section>
+    <section class="table_gems2">
+        <table>
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>2004</td>
+                    <td>2005</td>
+                    <td>2006</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="heading">Рубины</td>
+                    <td>43</td>
+                    <td>51</td>
+                    <td>79</td>
+                </tr>
+                <tr>
+                    <td class="heading">Изумруды</td>
+                    <td>28</td>
+                    <td>34</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <td class="heading">Сапфиры</td>
+                    <td>29</td>
+                    <td>57</td>
+                    <td>36</td>
+                </tr>
+                <tr>
+                    <td class="heading">Аметисты</td>
+                    <td>23</td>
+                    <td>64</td>
+                    <td>97</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="table_gems3">
+        <table>
+            <thead>
+                <tr>
+                    <td>Название</td>
+                    <td>Цвет</td>
+                    <td>Твердость по Моосу</td>
+                    <td>Формула</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Алмаз</td>
+                    <td>Белый</td>
+                    <td>10</td>
+                    <td>С</td>
+                </tr>
+                <tr>
+                    <td>Рубин</td>
+                    <td>Красный</td>
+                    <td>9</td>
+                    <td>Al<sub>2</sub>O<sub>3</sub></td>
+                </tr>
+                <tr>
+                    <td>Аметист</td>
+                    <td>Голубой</td>
+                    <td>7</td>
+                    <td>SiO<sub>2</sub></td>
+                </tr>
+                <tr>
+                    <td>Изумруд</td>
+                    <td>Зеленый</td>
+                    <td>8</td>
+                    <td>Be<sub>3</sub>Al<sub>2</sub>(SiO<sub>3</sub>)<sub>6</sub></td>
+                </tr>
+                <tr>
+                    <td>Сапфир</td>
+                    <td>Голубой</td>
+                    <td>9</td>
+                    <td>Al<sub>2</sub>O<sub>3</sub></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="progressbar">
+        <H3>Карта сокровищ</H3>
+        <hr>
+        <img src="https://img.freepik.com/premium-vector/map-treasures-paper-parchment_8071-3421.jpg
+        " alt="">
+        <br>
+            <label for="bar">Пройдено: </label>
+            <progress id="bar" value="6" max="10"></progress>
+        <hr>
+    </section>
+    <section class="chem_elements">
+        <h3>Химические элементы</h3>
+        <hr>
+        <table>
+            <tr>
+                <td>Номер</td>
+                <td>Название</td>
+                <td>Символ</td>
+                <td>Год</td>
+                <td>Статья</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><a href="http://" target="_blank" rel="noopener noreferrer">Водород</a></td>
+                <td><strong>H</strong></td>
+                <td>1766</td>
+                <td><a href="http://" target="_blank" rel="noopener noreferrer"><img src="../static/images/chem_book_icon.jpg" alt=""></a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><a href="http://" target="_blank" rel="noopener noreferrer">Гелий</a></td>
+                <td><strong>He</strong></td>
+                <td>1895</td>
+                <td><a href="http://" target="_blank" rel="noopener noreferrer"><img src="../static/images/chem_book_icon.jpg" alt=""></a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><a href="http://" target="_blank" rel="noopener noreferrer">Бор</a></td>
+                <td><strong>B</strong></td>
+                <td>1808</td>
+                <td><a href="http://" target="_blank" rel="noopener noreferrer"><img src="../static/images/chem_book_icon.jpg" alt=""></a></td>
+            </tr>
+        </table>
+        <hr>
+    </section>
+    <section>
+        <h3>Генераторы</h3>
+        <ul>
+            <li>Цвета
+                <ul>
+                    <li>Color Mixers</li>
+                    <li>Color Tester</li>
+                    <li>Color Pallete</li>
+                </ul>
+            </li>
+            <li>Фавиконы
+                <ol>
+                    <li>Favicon.cc
+                        <ul>
+                            <li><a href="http://" target="_blank" rel="noopener noreferrer">Скачать</a></li>
+                            <li><a href="http://" target="_blank" rel="noopener noreferrer">Демо</a></li>
+                        </ul>
+                    </li>
+                    <li>WebLab Favicon</li>
+                </ol>
+            </li>
+            <li>Фоны
+                <ul>
+                    <li>BgMaker</li>
+                    <li>StripeGenerator</li>
+                </ul>
+            </li>
+            <li>Изображения
+                <ol>
+                    <li>Buttonator</li>
+                    <li>AjaxLoad</li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h3>Стихотворение</h3>
+        <p>
+            Мириады маленьких дел<br>
+            Пьют по капле гаснущий день,<br>
+            А <em>дела большие</em> сушит жажда. <br>
+            Оставляя все на "потом",<br>
+            Прозреваем задним числом,<br>
+            Только день <strong>не повторится</strong> дважды.
+        </p>
+        <p>И.Тальков</p>
+    </section>
+    <section class="headers_example">
+        <div>
+            <h1>Заголовок первого уровня</h1>
+            <h2>Заголовок второго уровня</h2>
+            <h3>Заголовок третьего уровня</h3>
+            <p>Пример ссылки <a href="http://" target="_blank" rel="noopener noreferrer">ведущей на другую страницу</a></p>
+        </div>
+    </section>
+    <section>
+        <form action="" method="post">
+            <p><label for="week">Неделя: </label><input type="week" name="week" id=""></p>
+            <p><label for="dt">Дата и время: </label><input type="datetime-local" name="dt" id=""></p>
+            <p><label for="month">Месяц: </label><input type="month" name="month" id=""></p>
+            <p><label for="time">Время: </label><input type="time" name="time" id=""></p>
+            <p><input type="button" value="Отправить"></p>
+        </form>
+    </section>
+    <section class="job_application_form">
+        <h3>Форма заявки на работу в зоопарке</h3>
+        <p style="font-size: smaller;"><em>Пожалуйста, заполните форму. Обязательные поля помечены <span class="red_star">*</span></em>
+        </p>
+        <fieldset class="form-container">
+            <legend>Контактная информация</legend>
+            <div class="form-row">
+                <label for="name">Имя <span class="red_star">*</span></label>
+                <input type="text" name="name" id="">
+            </div>
+            <div class="form-row">
+                <label for="phone">Телефон</label>
+                <input type="tel" name="phone" id="">
+            </div>
+            <div class="form-row">
+                <label for="email">Email <span class="red_star">*</span></label>
+                <input type="email" name="" id="">
+            </div>
+        </fieldset>
+        <fieldset class="form-container">
+            <legend>Персональная информация</legend>
+            <div class="form-row">
+                <label for="age">Возраст <span class="red_star">*</span></label>
+                <input type="number" name="age" id="">
+            </div>
+            <div class="form-row">
+                <label for="gender">Пол</label>
+                <select name="gender" id="">
+                    <option value="male">Мужской</option>
+                    <option value="female">Женский</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="descr">Перечислите личные качества</label>
+                <textarea name="descr" id="" rows="5"></textarea>
+            </div>
+        </fieldset>
+        <fieldset class="form-container2">
+            <legend>Выберите ваших любимых животных</legend>
+            <label><input type="checkbox" value="Зебра">Зебра</label>
+            <label for=""><input type="checkbox" value="Кошак">Кошак</label>
+            <label for=""><input type="checkbox" value="Анаконда">Анаконда</label>
+            <label for=""><input type="checkbox" value="Человек">Человек</label>
+            <label for=""><input type="checkbox" value="Слон">Слон</label>
+            <label for=""><input type="checkbox" value="Антилопа">Антилопа</label>
+            <label for=""><input type="checkbox" value="Голубь">Голубь</label>
+            <label for=""><input type="checkbox" value="Краб">Краб</label>
+        </fieldset>
+        <input type="button" id="submit" value="Отправить информацию">
+    </section>
+</main>
+
+
+
+<footer>Подвал страницы</footer>
+{% endblock %}
