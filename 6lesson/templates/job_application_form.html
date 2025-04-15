@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <style>
+        .job_application_form h3 {
+            font-size: 28px;
+        }
+
+        .job_application_form .form-container {
+            display: grid;
+            grid-template-columns: 35% 65%;
+            gap: 10px;
+        }
+
+        .job_application_form .form-row {
+            display:contents;
+        }
+
+        .job_application_form .form-row label {
+            grid-column: 1;
+        }
+
+        .job_application_form .form-row input {
+            grid-column: 2;
+        }
+
+        .job_application_form fieldset {
+            max-width: 500px;
+            margin: 10px 0px;
+        }
+
+        .job_application_form .red_star {
+            color: red;
+        }
+
+        .job_application_form .form-container2 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .job_application_form .form-container2 label {
+            display: inline-block;
+        }
+
+        .job_application_form #submit {
+            padding: 15px;
+            border: 1px solid black;
+            border-radius: 0px;
+
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<section class="job_application_form">
+    <h3>Форма заявки на работу в зоопарке</h3>
+    <p style="font-size: smaller;"><em>Пожалуйста, заполните форму. Обязательные поля помечены <span class="red_star">*</span></em>
+    </p>
+    <fieldset class="form-container">
+        <legend>Контактная информация</legend>
+        <div class="form-row">
+            <label for="name">Имя <span class="red_star">*</span></label>
+            <input type="text" name="name" id="">
+        </div>
+        <div class="form-row">
+            <label for="phone">Телефон</label>
+            <input type="tel" name="phone" id="">
+        </div>
+        <div class="form-row">
+            <label for="email">Email <span class="red_star">*</span></label>
+            <input type="email" name="" id="">
+        </div>
+    </fieldset>
+    <fieldset class="form-container">
+        <legend>Персональная информация</legend>
+        <div class="form-row">
+            <label for="age">Возраст <span class="red_star">*</span></label>
+            <input type="number" name="age" id="">
+        </div>
+        <div class="form-row">
+            <label for="gender">Пол</label>
+            <select name="gender" id="">
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label for="descr">Перечислите личные качества</label>
+            <textarea name="descr" id="" rows="5"></textarea>
+        </div>
+    </fieldset>
+    <fieldset class="form-container2">
+        <legend>Выберите ваших любимых животных</legend>
+        <label><input type="checkbox" value="Зебра">Зебра</label>
+        <label for=""><input type="checkbox" value="Кошак">Кошак</label>
+        <label for=""><input type="checkbox" value="Анаконда">Анаконда</label>
+        <label for=""><input type="checkbox" value="Человек">Человек</label>
+        <label for=""><input type="checkbox" value="Слон">Слон</label>
+        <label for=""><input type="checkbox" value="Антилопа">Антилопа</label>
+        <label for=""><input type="checkbox" value="Голубь">Голубь</label>
+        <label for=""><input type="checkbox" value="Краб">Краб</label>
+    </fieldset>
+    <input type="button" id="submit" value="Отправить заявку">
+</section>
+
+{% endblock %}

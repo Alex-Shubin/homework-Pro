@@ -1,0 +1,17 @@
+.headers_example div {
+    background-color:rgb(237, 234, 230);
+    
+}
+
+.headers_example h1 {
+    color: #744d1e;
+    font-size: 30px;
+}
+
+.headers_example h3 {
+    color: #a28d8d;
+}
+
+.headers_example a {
+    color: green;
+}
