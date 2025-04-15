@@ -326,4 +326,4 @@ if __name__ == '__main__':
     )
     print(users)
 
-    app.run(debug=True, port=7777)
+    app.run(debug=True, port=7777, host='0.0.0.0')
