@@ -1,5 +1,5 @@
 body {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     margin: 0;
@@ -8,9 +8,9 @@ body {
 .container {
     background-color: #ccc;
     display: grid;
-    grid-template-columns: 220px 1fr;
-    grid-template-rows: 150px 1fr 5%;
-    height: calc(100vh - 20px);
+    grid-template-columns: 220px auto;
+    grid-template-rows: 150px auto 50px;
+    min-height: calc(100vh - 20px);
     width: 80%;
     border: 1px solid;
     border-radius: 10px;
@@ -40,9 +40,9 @@ main {
     grid-row: 2/3;
     background-color: #f0f0f0;
     display: inline-block;
-    align-items: flex-start;
+    /* align-items: flex-start; #это для Flex
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; */
     padding: 20px;
     gap: 20px;
     border-radius: 5px;
