@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<link rel="stylesheet" href="../static/css/login_register.css">
+{% endblock %}
+
+{% block content %}
+<section>
+    <form method="post">
+        <fieldset>
+        <legend>Введите ваши данные:</legend>
+        <div class="reg_login_form">
+            <div class="field_group">
+                <label for="login">Ваш логин: </label>
+                <input type="text" 
+                name="login" 
+                value="{{ filled_login|default('') }}"
+                placeholder="Admin123">
+                <p class="error {% if error %}visible{% endif%}">
+                    {{ error|default('') }}</p>
+            </div>
+            <!-- <p><label for="login">Ваш логин: </label>
+                <input type="text" 
+                name="login"
+                value="{{ filled_login|default('') }}"
+                ></p>
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %} -->
+            <div class="field_group">
+                <label for="password">Ваш пароль: </label>
+                <input type="password" 
+                name="password" 
+                placeholder="Admin123">
+                <!-- <p class="error {% if error %}visible{% endif%}">
+                    {{ error|default('') }}</p> -->
+            </div>
+            <!-- <p><label for="password">Ваш пароль: </label>
+                <input type="password" name="password"
+                placeholder="Admin123"></p> -->
+        </div>
+        <p><input type="submit" value="Войти"></p>
+    </fieldset>
+    </form>
+
+</section>
+
+{% endblock %}

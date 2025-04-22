@@ -1,0 +1,28 @@
+.table_gems2 table {
+    border-collapse: collapse;
+    width: 250px;
+}
+
+.table_gems2 td {
+    border: 1px solid black;
+    /* padding: 7px; */
+    text-align: center;
+}
+
+.table_gems2 .heading {
+    text-align: left;
+}
+
+.table_gems2 thead {
+    background-color: #a64d79;
+    color: white;
+    font-weight: 700;
+}
+
+.table_gems2 tbody tr:nth-child(odd) {
+    background: #f4f7c5;
+}
+
+.table_gems2 tbody tr:nth-child(even) {
+    background: #aeb17c;
+}

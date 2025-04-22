@@ -1,0 +1,18 @@
+/* обязательно убрать стандартные стили браузера */
+.progressbar progress {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* этот видимо отвечает за фон - не понял за какой, потому что ничего не меняется */
+.progressbar progress::-webkit-progress-bar {
+    background: #eee;
+    border-radius: 3px;
+}
+
+/* а этот отвечает за саму полоску - работает */
+.progressbar progress::-webkit-progress-value {
+    background-color: #329a4fbb;
+    box-shadow: 2px 2px 5px 5px rgba(239, 226, 39, 0.667) inset;
+    border-radius: 3px;
+}

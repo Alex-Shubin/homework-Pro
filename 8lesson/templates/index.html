@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title%}
+<title>Flask Animal, Weather and Daily Quote app</title>
+{% endblock %}
+
+{% block style %}
+<style>
+    .image-container {
+    position:relative;
+    }
+
+    .zoo-image {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Интерактивные области */
+    .interactive-area {
+        position: absolute;
+        border: 2px solid transparent;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    /* Здание */
+    .building {
+        top: 10%;
+        left: 10%;
+        width: 30%;
+        height: 30%;
+    }
+
+    /* Пруд */
+    .pond {
+        top: 48%;
+        left: 20%;
+        width: 70%;
+        height: 20%;
+    }
+
+    /* Лиса */
+    .fox {
+        top: 65%;
+        left: 80%;
+        width: 15%;
+        height: 20%;
+    }
+
+    /* Лисы */
+    .foxes {
+        top: 60%;
+        left: 5%;
+        width: 30%;
+        height: 35%;
+    }
+
+    /* Эффект при наведении */
+    .interactive-area:hover {
+        border-color: red;
+    }
+</style>
+
+{% endblock %}
+
+{% block header %}
+<h2>Кликать по пруду с утками, лисам и зданию</h2>
+{% endblock %}
+
+
+{% block content %}
+<div class="image-container">
+    <img src="static/images/Zoo.jpg" alt="Zoo" class="zoo-image">
+    <!-- Здание -->
+    <a href="/job_application_form/">
+        <div class="interactive-area building" title="Здание ZOO"></div>
+    </a>
+    <!-- Озеро -->
+    <a href="/duck/">
+        <div class="interactive-area pond" title="Пруд с утками"></div>
+    </a>
+    <!-- Лиса -->
+    <a href="/fox/1/">
+        <div class="interactive-area fox" title="Лиса"></div>
+    </a>
+    <!-- Лисы -->
+    <a href="/fox/2/">
+        <div class="interactive-area foxes" title="Лисы"></div>
+    </a>
+</div>
+{% endblock %}
