@@ -8,42 +8,38 @@
 
 
 {% block content_head %}
-    <h2>КВИЗЫ <a class="button" href="#modal1">+</a></h2>    
+    <h2>КВИЗЫ И ВОПРОСЫ</h2>    
 {% endblock %}
 
 {% block content %}    
-    <div class="quizes quiz_form">
-        <div class="quiz-row quiz-hrow">
-            <div class="quiz-col">№</div>
-            <div class="quiz-col">Название</div>
-            <div class="quiz-col">Сколько вопросов</div>
-        </div>
-        {% for q in quizes %}
-        <a href="/quiz_edit/{{q.id}}">
-            <div class="quiz-row">
-                <div class="quiz-col">{{ loop.index+1 }}</div>
-                <div class="quiz-col">{{ q.name }}</div>
-                <div class="quiz-col">{{ len(q.question) }}</div>
+<div class="two-column-layout">
+    <div class="left-column">
+        <H3>Квизы <a class="button" href="#modal1">+</a></H3>
+            <div class="quizes quiz_form">
+                    <div class="quiz-row quiz-hrow">
+                        <div class="quiz-col">№</div>
+                        <div class="quiz-col">Название</div>
+                        <div class="quiz-col">Сколько вопросов</div>
+                    </div>
+                {% for q in quizes %}
+                <a href="/quiz_edit/{{q.id}}">
+                    <div class="quiz-row">
+                        <div class="quiz-col">{{ loop.index+1 }}</div>
+                        <div class="quiz-col">{{ q.name }}</div>
+                        <div class="quiz-col">{{ len(q.question) }}</div>
+                    </div>
+                </a>
+                {% endfor %}
             </div>
-        </a>
-        {% endfor %}
+            {% include 'modal_quiz_add.html' %}
     </div>
-
-
-    {% include 'modal_quiz_add.html' %}
-
-{% endblock %}
-
-{% block content2_head %}
-    <h2>Вопросы  <a class="button" href="#modal2">+</a></h2>
-{% endblock %}
-
-
-{% block content2 %}
-
-
-<div class="questions quiz_form">
-    {% include 'form_questions_tab.html' %}
-</div>
-{% include 'modal_question_add.html' %}    
+    <div class="right-column">
+        <H3>Вопросы <a class="button" href="#modal2">+</a></H3>
+        <div class="questions quiz_form">
+            {% include 'form_questions_tab.html' %}
+        </div>
+        {% include 'modal_question_add.html' %}  
+    </div>
+</div>    
+  
 {% endblock %}
